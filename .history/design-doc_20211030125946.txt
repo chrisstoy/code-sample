@@ -1,0 +1,133 @@
+Target RWE Code Test
+
+Notepad app utilizing Angular, Express.js, and PostgeSQL
+
+Each user can create, edit, and delete Notes.
+
+
+
+
+Each component deployed in a Docker container
+
+Two user types:
+	Admin - access to user list and maintenance
+	User - access to only user profile and notes for that user
+	
+	
+Express Server
+- basic authentication 
+- REST API for updating database and providing data
+-- https://jasonwatmore.com/post/2018/09/24/nodejs-basic-authentication-tutorial-with-example-api
+
+
+Database Tables
+-------------
+
+	Users
+		id: string,
+		first_name: string,
+		last_name: string,
+		email: string,
+		role: Admin | User
+		password: string
+		last_login: Date
+
+	Notes
+		id: string,
+		owner_id: string,
+		last_update: Date,
+		title: string,
+		text: string
+
+
+
+API
+-------------
+/admin
+	GET /admin/users	- returns list of all users in the system
+	DELETE /admin/users/{{user-id}} - delete a user and all of their notes from the system
+	POST /admin/users/{{user-id}}/reset-password	- force resetting a user's password
+	POST /admin/users/{{user-id}}/logout - force logging out a user
+
+/users
+	PUT /users	- create a new user. Returns the new user record
+		User: {
+			id: string?,
+			first_name: string,
+			last_name: string,
+			email: string,
+			password: string
+		}
+
+	GET /users/{{user-id}}	- returns details for the specified user
+		User
+
+	POST /users/{{user-id}} - edit an existing user
+		User
+
+	POST /users/{{user-id}}/password - change a user's password
+		Password: {
+			old_password: string,
+			new_password: string
+		}
+
+	DELETE /users/{{user-id}} - delete a user and all of their notes from the system
+
+	POST /users/authenticate	- authenticate a login attempt and return basic auth token if successful
+		Auth {
+			user_id: string,
+			password: string	// 
+		}
+
+	POST /users/logout - removes the valid token for the currently logged in user
+		Empty
+
+/notes
+	GET /notes/{{userid}}	- return list of all Notes for this user
+		[ NoteSummary: {
+			id: string
+			title: string
+			last_update: Date,
+		}]
+
+	PUT /notes/{{user-id}}	- create a new note
+		Note: {
+			id: string?,
+			title: string,
+			text: string
+			last_update: Date,
+		}
+
+	GET /notes/{{user-id}}/{{note-id}}	- get an existing note
+		Note: {
+			id: string,
+			title: string,
+			text: string,
+			last_update: Date,
+		}
+
+	POST /notes/{{user-id}}/{{note-id}}	- update an existing note
+		Note: {
+			id: string?,
+			title: string,
+			text: string,
+			last_update: Date,
+		}
+
+	DELETE /notes/{{user-id}}/{{note-id}} - delete an existing note
+
+
+Web App
+----------
+
+	/login	- main login page.  user taken here if no valid token
+	
+	/new-user - create a new user
+	
+	/admin - administration page
+		list of users
+
+	/notes - list of notes for the current user
+		user can create a new note, open an existing note, or delete an existing note
+	
+	/note/{{note-id}}	- note editor. if note-id is empty, creates a new note

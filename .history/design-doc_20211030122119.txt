@@ -1,0 +1,36 @@
+Target RWE Code Test
+
+Notepad app utilizing Angular, Express.js, and PostgeSQL
+
+Each user can create, edit, and delete Notes.
+
+
+
+
+Each component deployed in a Docker container
+
+Two user types:
+	Admin - access to user list and all data
+	User - access to only user profile and todo list for that user
+	
+	
+Express Server
+- basic authentication 
+- REST API for updating database and providing data
+-- https://jasonwatmore.com/post/2018/09/24/nodejs-basic-authentication-tutorial-with-example-api
+
+Database
+- PostgreSQL
+- 
+
+
+API
+/users
+	GET /users	- returns list of all users in the system
+	PUT /users	- create a new user
+
+	GET /users/{{user-id}}	- returns details for the specified user
+	POST /users/{{user-id}} - edit an existing user
+	DELETE /users/{{user-id}} - delete a user and all of their notes from the system
+
+/login
