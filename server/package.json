@@ -1,0 +1,16 @@
+{
+  "name": "codesample-server",
+  "version": "1.0.0",
+  "description": "ExpressJS server for CodeSample app",
+  "main": "index.js",
+  "scripts": {
+    "build": "docker build -t codesample/server .",
+    "start": "docker run -p 3000:3000 codesample/server"
+  },
+  "author": "Chris Stoy",
+  "license": "MIT",
+  "dependencies": {
+    "expess": "0.0.1-security",
+    "express": "^4.17.1"
+  }
+}

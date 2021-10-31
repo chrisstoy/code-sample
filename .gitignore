@@ -5,12 +5,10 @@
 /tmp
 /out-tsc
 /public
-# Only exists if Bazel was run
-/bazel-out
-/src/assets/ios
 
 # dependencies
 /node_modules
+*/node_modules
 
 # profiling files
 chrome-profiler-events.json
@@ -28,7 +26,7 @@ speed-measure-plugin.json
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json
-!.vscode/tasks.json
+!.vscode/tasks.jsona
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
@@ -47,6 +45,3 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Firebase
-/.firebase
-firebase-debug.log

@@ -24,6 +24,10 @@ Two user types:
 
 Database Tables
 ---------------
+
+user: codesample
+password: CodeSample123
+
 	Users
 		id: string,
 		first_name: string,
@@ -40,11 +44,69 @@ Database Tables
 		title: string,
 		text: string
 
-	LoginTokens
+	Tokens
 		user_id: string,
 		token: string,
 		issued: Date
 
+```sql
+CREATE TABLE public.users
+(
+    id character varying(40) NOT NULL,
+    first_name character varying(45) NOT NULL,
+    last_name character varying(45) NOT NULL,
+    email character varying(45) NOT NULL,
+    "isAdmin" boolean NOT NULL,
+    password character varying(45),
+    last_login date NOT NULL,
+    PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE public.users
+    OWNER to codesample;
+COMMENT ON TABLE public.users
+    IS 'List of all users';
+
+---- 
+CREATE TABLE public.notes
+(
+    id character varying(40) NOT NULL,
+    owner_id character varying(40) NOT NULL,
+    last_update date NOT NULL,
+    title character varying(128) NOT NULL,
+    text character varying(2048) NOT NULL,
+    PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE public.notes
+    OWNER to codesample;
+COMMENT ON TABLE public.notes
+    IS 'Notes created by users';
+
+----
+
+CREATE TABLE public.tokens
+(
+    token character varying(40) NOT NULL,
+    user_id character varying(40) NOT NULL,
+    issued date NOT NULL,
+    PRIMARY KEY (user_id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE public.tokens
+    OWNER to codesample;
+COMMENT ON TABLE public.tokens
+    IS 'Active login tokens for each user';
+```
 
 API
 ---

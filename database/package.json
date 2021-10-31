@@ -1,0 +1,14 @@
+{
+  "name": "codesample-database",
+  "version": "1.0.0",
+  "description": "PostgresSQL database for CodeSample app",
+  "scripts": {
+    "build": "docker build -t codesample/database .",
+    "start": "docker run -p 5432:5432 -e POSTGRES_HOST_AUTH_METHOD=trust codesample/database",
+    "debug": "npm run build && npm run start",
+    "start-admin": "docker run --rm -d -p 5050:5050 thajeztah/pgadmin4"
+  },
+  "author": "Chris Stoy",
+  "license": "MIT",
+  "dependencies": {}
+}

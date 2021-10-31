@@ -1,0 +1,20 @@
+{
+  "name": "code-sample",
+  "version": "1.0.0",
+  "description": "Code sample application",
+  "scripts": {
+    "build-all": "cd database && npm run build",
+    "start-all": "cd database && npm run start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisstoy/code-sample.git"
+  },
+  "author": "Chris Stoy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrisstoy/code-sample/issues"
+  },
+  "homepage": "https://github.com/chrisstoy/code-sample#readme"
+}
