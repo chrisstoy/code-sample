@@ -25,14 +25,15 @@ router.get('/user/:id', async (request, response) => {
 /**
  * Create a new user
  */
-router.put('/user/:id', async (request, response) => {
-  const id = request.params.id;
+router.post('/user', async (request, response) => {
   const { first_name, last_name, email } = request.body;
 
-  await db.query(
-    `INSERT INTO sample.users (id, first_name, last_name, email, is_admin, last_login) VALUES ($1, $2, $3, $4, false, CURRENT_TIMESTAMP);`,
-    [id, first_name, last_name, email]
+  const result = await db.query(
+    `INSERT INTO sample.users (first_name, last_name, email, is_admin, last_login) VALUES ($1, $2, $3, false, CURRENT_TIMESTAMP);`,
+    [first_name, last_name, email]
   );
+
+  console.log(`POST: /users`, result);
 
   const { rows } = await db.query('SELECT * FROM sample.users WHERE id = $1;', [id]);
   response.status(200).json(rows[0]);
@@ -41,7 +42,7 @@ router.put('/user/:id', async (request, response) => {
 /**
  * Update an existing user
  */
-router.post('/user/:id', async (request, response) => {
+router.put('/user/:id', async (request, response) => {
   const id = request.params.id;
 
   console.log(`resuest.body: `, request.body);

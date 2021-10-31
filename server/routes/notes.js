@@ -33,31 +33,29 @@ router.get('/:user_id/:note_id', async (request, response) => {
 /**
  * Create a new note
  */
+router.post('/:user_id', async (request, response) => {
+  const owner_id = request.params.user_id;
+  const { title, text } = request.body;
+
+  const result = await db.query(
+    `INSERT INTO sample.notes (owner_id, title, text, last_update) VALUES ($1, $2, $3, CURRENT_TIMESTAMP);`,
+    [owner_id, title, text]
+  );
+
+  const { rows } = await db.query('SELECT * FROM sample.notes WHERE id = $1', [note_id]);
+  response.status(200).json(result);
+});
+
+/**
+ * Update an existing Note
+ */
 router.put('/:user_id/:note_id', async (request, response) => {
   const owner_id = request.params.user_id;
   const note_id = request.params.note_id;
 
   const { title, text } = request.body;
 
-  await db.query(
-    `INSERT INTO sample.notes (id, owner_id, title, text, last_update) VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP);`,
-    [note_id, owner_id, title, text]
-  );
-
-  const { rows } = await db.query('SELECT * FROM sample.notes WHERE id = $1', [note_id]);
-  response.status(200).json(rows[0]);
-});
-
-/**
- * Update an existing Note
- */
-router.post('/:user_id/:note_id', async (request, response) => {
-  const owner_id = request.params.user_id;
-  const note_id = request.params.note_id;
-
-  const { title, text } = request.body;
-
-  await db.query(
+  const result = await db.query(
     'UPDATE sample.notes SET title = $1, text = $2, last_update = CURRENT_TIMESTAMP WHERE owner_id = $3 AND id = $4',
     [title, text, owner_id, note_id]
   );
