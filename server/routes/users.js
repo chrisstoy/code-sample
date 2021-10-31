@@ -33,10 +33,7 @@ router.post('/user', async (request, response) => {
     [first_name, last_name, email]
   );
 
-  console.log(`POST: /users`, result);
-
-  const { rows } = await db.query('SELECT * FROM sample.users WHERE id = $1;', [id]);
-  response.status(200).json(rows[0]);
+  response.status(200).json(result);
 });
 
 /**
@@ -49,7 +46,7 @@ router.put('/user/:id', async (request, response) => {
 
   const { first_name, last_name, email } = request.body;
 
-  await db.query('UPDATE sample.users SET first_name = $1, last_name = $2, email = $3 WHERE id = $4', [
+  const result = await db.query('UPDATE sample.users SET first_name = $1, last_name = $2, email = $3 WHERE id = $4', [
     first_name,
     last_name,
     email,

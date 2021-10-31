@@ -42,7 +42,6 @@ router.post('/:user_id', async (request, response) => {
     [owner_id, title, text]
   );
 
-  const { rows } = await db.query('SELECT * FROM sample.notes WHERE id = $1', [note_id]);
   response.status(200).json(result);
 });
 
