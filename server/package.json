@@ -2,15 +2,23 @@
   "name": "codesample-server",
   "version": "1.0.0",
   "description": "ExpressJS server for CodeSample app",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "build": "docker build -t codesample/server .",
-    "start": "docker run -p 3000:3000 codesample/server"
+    "start": "docker run -p 3000:3000 codesample/server",
+    "serve": "node app.js"
   },
   "author": "Chris Stoy",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "expess": "0.0.1-security",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-promise-router": "^4.1.0",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.6.1",
+    "eslint": "^8.1.0"
   }
 }

@@ -38,17 +38,12 @@ COMMENT ON SCHEMA sample
 /* Create the Users table */
 CREATE TABLE sample.users
 (
-    id character varying(40) NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
     first_name character varying(45) NOT NULL,
     last_name character varying(45) NOT NULL,
     email character varying(45) NOT NULL,
     is_admin boolean NOT NULL,
-    password character varying(45),
-    last_login timestamp without time zone NOT NULL,
-    PRIMARY KEY (id)
-)
-WITH (
-    OIDS = FALSE
+    last_login timestamp without time zone NOT NULL
 );
 ALTER TABLE sample.users
     OWNER to codesample;
@@ -59,15 +54,11 @@ COMMENT ON TABLE sample.users
 /* Create the Notes table that holds every note created by users */
 CREATE TABLE sample.notes
 (
-    id character varying(40) NOT NULL,
-    owner_id character varying(40) NOT NULL,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+    owner_id uuid NOT NULL,
     last_update timestamp without time zone NOT NULL,
     title character varying(128) NOT NULL,
-    text character varying(2048) NOT NULL,
-    PRIMARY KEY (id)
-)
-WITH (
-    OIDS = FALSE
+    text character varying(2048) NOT NULL
 );
 ALTER TABLE sample.notes
     OWNER to codesample;
@@ -75,16 +66,25 @@ COMMENT ON TABLE sample.notes
     IS 'Notes created by users';
 
 
+/* Create the Passwords table */
+CREATE TABLE sample.passwords
+(
+    user_id uuid NOT NULL PRIMARY KEY,
+    password character varying(45) NOT NULL,
+    last_changed timestamp without time zone NOT NULL
+);
+ALTER TABLE sample.passwords
+    OWNER to codesample;
+COMMENT ON TABLE sample.passwords
+    IS 'Passwords for each user';
+
+
 /* Create the logn Tokens table */
 CREATE TABLE sample.tokens
 (
+    user_id uuid NOT NULL PRIMARY KEY,
     token character varying(40) NOT NULL,
-    user_id character varying(40) NOT NULL,
-    issued timestamp without time zone NOT NULL,
-    PRIMARY KEY (user_id)
-)
-WITH (
-    OIDS = FALSE
+    issued timestamp without time zone NOT NULL
 );
 ALTER TABLE sample.tokens
     OWNER to codesample;
@@ -96,10 +96,16 @@ COMMENT ON TABLE sample.tokens
  */
 
 INSERT INTO sample.users 
-(id, first_name, last_name, email, password, is_admin, last_login)
+(id, first_name, last_name, email, is_admin, last_login)
 VALUES
-('5450e4d9-3f69-4921-ad6f-28208e0f3860', 'Luke', 'Skywalker', 'luke@tatooine.net', 'TheForce', false, CURRENT_TIMESTAMP),
-('e228db4a-d45c-4d09-9d2d-92e97ab3464a', 'Darth', 'Vader', 'darth.vader@deathstar.gov', 'IHateHighGround', true, CURRENT_TIMESTAMP);
+('5450e4d9-3f69-4921-ad6f-28208e0f3860', 'Luke', 'Skywalker', 'luke@tatooine.net', false, CURRENT_TIMESTAMP),
+('e228db4a-d45c-4d09-9d2d-92e97ab3464a', 'Darth', 'Vader', 'darth.vader@deathstar.gov', true, CURRENT_TIMESTAMP);
+
+INSERT INTO sample.passwords 
+(user_id, password, last_changed)
+VALUES
+('5450e4d9-3f69-4921-ad6f-28208e0f3860', 'ILoveBlueMilk', CURRENT_TIMESTAMP),
+('e228db4a-d45c-4d09-9d2d-92e97ab3464a', 'lavaSux1', CURRENT_TIMESTAMP);
 
 
 INSERT INTO sample.notes
