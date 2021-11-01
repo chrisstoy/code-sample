@@ -1,0 +1,26 @@
+
+:host {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.app {
+  display: flex;
+  flex: 1 1 auto;
+
+  &-header {
+    display: flex;
+    flex: 0 0 auto;
+  }
+
+  &-content {
+    display: flex;
+    flex: 1 1 auto;
+  }
+
+  &-footer {
+    display: flex;
+    flex: 0 0 auto;
+  }
+}

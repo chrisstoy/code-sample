@@ -57,7 +57,7 @@ CREATE TABLE sample.notes
     id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
     owner_id uuid NOT NULL,
     last_update timestamp without time zone NOT NULL,
-    title character varying(128) NOT NULL,
+    title character varying(48) NOT NULL,
     text character varying(2048) NOT NULL
 );
 ALTER TABLE sample.notes

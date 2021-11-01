@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "Code sample application",
   "scripts": {
-    "build-all": "cd database && npm run build",
-    "start-all": "cd database && npm run start",
+    "build-db": "cd database && npm run build",
+    "start-db": "cd database && npm run start",
+    "build-server": "cd server && npm run build",
+    "start-server": "cd server && npm run start",
+    "debug-server": "cd server && npm run serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

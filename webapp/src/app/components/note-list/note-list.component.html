@@ -1,0 +1,22 @@
+<mat-card class="note-list">
+  <mat-card-title>Notes</mat-card-title>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let note of notes$ | async">
+        <ng-container *ngTemplateOutlet="summary; context: {note}"></ng-container>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #summary let-note="note">
+  <div class="note-summary">
+    <span class="note-summary--note" (click)="onSelect(note)">
+      <div class="note-summary--title">{{note.title}}</div>
+      <div class="note-summary--spacer"></div>
+      <div class="note-summary--date">{{note.last_update | date}}</div>
+    </span>
+    <div class="note-summary--delete"><button mat-icon-button (click)="onDelete(note)"><mat-icon>delete</mat-icon></button></div>
+  </div>
+</ng-template>
+

@@ -1,0 +1,11 @@
+.footer {
+    display: flex;
+    margin: 1rem;
+    flex-direction: row;
+    flex: 1 1 auto;
+    justify-content: center;
+
+    &-text {
+      font-size: x-small;
+    }
+  }

@@ -1,0 +1,41 @@
+:host {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.note-list {
+  display: flex;
+  margin: 1rem;
+  flex: 1 1 auto;
+  flex-direction: column;
+
+  .note-summary {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1  auto;
+    align-items: center;
+
+      &:hover {
+        background-color: blanchedalmond;
+        cursor: pointer;
+      }
+
+      &--note {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: row;
+      }
+
+      &--title {
+        flex: 0 0 auto;
+      }
+
+      &--spacer {
+        flex: 1 1 auto;
+      }
+
+      &--date {
+        flex: 0 0  auto;
+      }
+  }
+}
