@@ -15,14 +15,14 @@ app.use(cors());
 // parse application/json
 app.use(bodyParser.json());
 
+// load all of our routes
+mountRoutes(app);
+
 // generic error handler just returns error code with error as body
 app.use((err, req, res) => {
   // return a sever error doe
   res.status(500).send(err);
 });
-
-// load all of our routes
-mountRoutes(app);
 
 // listen for connections
 const server = app.listen(port, () => {

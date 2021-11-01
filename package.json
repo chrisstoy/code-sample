@@ -3,12 +3,20 @@
   "version": "1.0.0",
   "description": "Code sample application",
   "scripts": {
-    "build-db": "cd database && npm run build",
-    "start-db": "cd database && npm run start",
-    "build-server": "cd server && npm run build",
-    "start-server": "cd server && npm run start",
+    "build-db": "cd database && npm run build-docker",
+    "run-db": "cd database && npm run run-docker",
+    "kill-db": "cd database && npm run kill-docker",
+    "build-server": "cd server && npm run build-docker",
+    "run-server": "cd server && npm run run-docker",
+    "kill-server": "cd server && npm run kill-server",
     "debug-server": "cd server && npm run serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-webapp": "cd webapp && npm run build-docker",
+    "run-webapp": "cd webapp && npm run run-docker",
+    "kill-webapp": "cd webapp && npm run kill-docker",
+    "debug-webapp": "cd webapp && npm run start",
+    "build-all": "npm run build-db && npm run build-server && npm run build-webapp",
+    "run-all": "npm run run-db && npm run run-server && npm run run-webapp",
+    "kill-all": "npm run kill-webapp && npm run kill-server && npm run kill-db"
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,9 @@
 const { Pool } = require('pg');
 
+// the database is running on the same machine as we are, so use the same IP for host
 const pool = new Pool({
-  host: 'localhost',
+  host: '0.0.0.0',
+  port: 5432,
   user: 'codesample',
   database: 'code_sample',
   max: 20,

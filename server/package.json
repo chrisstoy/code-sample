@@ -4,9 +4,10 @@
   "description": "ExpressJS server for CodeSample app",
   "main": "app.js",
   "scripts": {
-    "build": "docker build -t codesample/server .",
-    "start": "docker run -p 3000:3000 codesample/server",
-    "serve": "node app.js"
+    "serve": "node app.js",
+    "build-docker": "docker build -t codesample/server .",
+    "run-docker": "docker run --name codesample_server -d -p 3000:3000 codesample/server",
+    "kill-docker": "docker kill codesample_server && docker rm codesample_server"
   },
   "author": "Chris Stoy",
   "license": "MIT",
