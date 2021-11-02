@@ -22,6 +22,7 @@ export class AuthService {
    * @param password - password to use for authentication
    */
   authenticate(email: string, password: string): Observable<User | undefined> {
+    // TODO - return mock user
     this.userSubject.next({
       id: '5450e4d9-3f69-4921-ad6f-28208e0f3860',
       firstName: 'Luke',
@@ -31,5 +32,12 @@ export class AuthService {
       lastLogin: new Date('2021-11-01T17:39:55.502Z'),
     });
     return this.user$;
+  }
+
+  /**
+   * Logout the current user
+   */
+  logout() {
+    // TODO
   }
 }

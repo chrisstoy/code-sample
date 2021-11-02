@@ -1,12 +1,15 @@
 import { TestBed } from '@angular/core/testing';
-
+import { MockBuilder } from 'ng-mocks';
 import { AdminService } from './admin.service';
 
 describe('AdminService', () => {
   let service: AdminService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    return MockBuilder(AdminService);
+  });
+
+  beforeEach(() => {
     service = TestBed.inject(AdminService);
   });
 

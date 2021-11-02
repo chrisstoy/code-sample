@@ -7,7 +7,8 @@
     "run-docker": "docker run --name codesample_database -d -p 5432:5432 -e POSTGRES_HOST_AUTH_METHOD=trust codesample/database",
     "kill-docker": "docker kill codesample_database && docker rm codesample_database",
     "start-admin": "docker run --name pgadmin --rm -d -p 5050:5050 thajeztah/pgadmin4",
-    "debug": "npm run build && npm run start"
+    "debug": "npm run build && npm run start",
+    "test": ""
   },
   "author": "Chris Stoy",
   "license": "MIT",

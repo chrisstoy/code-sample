@@ -3,20 +3,25 @@
   "version": "1.0.0",
   "description": "Code sample application",
   "scripts": {
+    "install": "cd database && npm i && cd ../server && npm i && cd ../webapp && npm i",
     "build-db": "cd database && npm run build-docker",
     "run-db": "cd database && npm run run-docker",
     "kill-db": "cd database && npm run kill-docker",
+    "test-db": "cd database && npm run test",
     "build-server": "cd server && npm run build-docker",
     "run-server": "cd server && npm run run-docker",
     "kill-server": "cd server && npm run kill-server",
     "debug-server": "cd server && npm run serve",
+    "test-server": "cd server && npm run test",
     "build-webapp": "cd webapp && npm run build-docker",
     "run-webapp": "cd webapp && npm run run-docker",
     "kill-webapp": "cd webapp && npm run kill-docker",
     "debug-webapp": "cd webapp && npm run start",
+    "test-webapp": "cd webapp && npm run test",
     "build-all": "npm run build-db && npm run build-server && npm run build-webapp",
     "run-all": "npm run run-db && npm run run-server && npm run run-webapp",
-    "kill-all": "npm run kill-webapp && npm run kill-server && npm run kill-db"
+    "kill-all": "npm run kill-webapp && npm run kill-server && npm run kill-db",
+    "test-all": "npm run test-db && npm run test-server && npm run test-webapp"
   },
   "repository": {
     "type": "git",

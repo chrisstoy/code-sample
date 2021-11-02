@@ -7,7 +7,8 @@
     "serve": "node app.js",
     "build-docker": "docker build -t codesample/server .",
     "run-docker": "docker run --name codesample_server -d -p 3000:3000 codesample/server",
-    "kill-docker": "docker kill codesample_server && docker rm codesample_server"
+    "kill-docker": "docker kill codesample_server && docker rm codesample_server",
+    "test": ""
   },
   "author": "Chris Stoy",
   "license": "MIT",
