@@ -32,5 +32,8 @@
   "bugs": {
     "url": "https://github.com/chrisstoy/code-sample/issues"
   },
-  "homepage": "https://github.com/chrisstoy/code-sample#readme"
+  "homepage": "https://github.com/chrisstoy/code-sample#readme",
+  "dependencies": {
+    "all": "0.0.0"
+  }
 }

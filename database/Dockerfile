@@ -1,5 +1,5 @@
 # Create PostgreSQL image and initalize database
-FROM library/postgres
+FROM postgres:14
 
 RUN mkdir -p /tmp/psql_data/
 

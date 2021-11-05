@@ -16,28 +16,28 @@ export class NotesService {
    * Fetch the list of notes for the current user
    */
   getNotes(): Observable<NoteSummary[]> {
-    // return combineLatest([this.configService.config$, this.authService.user$]).pipe(
-    //   take(1),
-    //   map(([config, user]) => {
-    //     return `${config.apiUrl}/notes/${user!.id}`;
-    //   }),
-    //   switchMap((url: string) => {
-    //     return this.http.get<NoteSummary[]>(url);
-    //   })
-    // );
+    return combineLatest([this.configService.config$, this.authService.user$]).pipe(
+      take(1),
+      map(([config, user]) => {
+        return `${config.apiUrl}/notes/${user!.id}`;
+      }),
+      switchMap((url: string) => {
+        return this.http.get<NoteSummary[]>(url);
+      })
+    );
 
-    return of([
-      {
-        id: 'db7d4695-daf8-4bfb-a5c1-4b2f8c7a32fb',
-        title: 'Things to Do',
-        lastUpdate: new Date('2021-11-01T17:39:55.505Z'),
-      },
-      {
-        id: 'f11f09f9-8dcb-4b63-84b7-37b24e000359',
-        title: 'Poem',
-        lastUpdate: new Date('2021-11-01T17:39:55.505Z'),
-      },
-    ]);
+    // return of([
+    //   {
+    //     id: 'db7d4695-daf8-4bfb-a5c1-4b2f8c7a32fb',
+    //     title: 'Things to Do',
+    //     lastUpdate: new Date('2021-11-01T17:39:55.505Z'),
+    //   },
+    //   {
+    //     id: 'f11f09f9-8dcb-4b63-84b7-37b24e000359',
+    //     title: 'Poem',
+    //     lastUpdate: new Date('2021-11-01T17:39:55.505Z'),
+    //   },
+    // ]);
   }
 
   /**

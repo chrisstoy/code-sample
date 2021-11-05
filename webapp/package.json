@@ -7,10 +7,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "dist": "npm run build && npm run build-docker",
     "test": "ng test --no-watch --code-coverage",
     "test-debug": "ng test",
-    "build-docker": "docker build -t codesample/webapp .",
+    "build-docker": "npm run build && docker build -t codesample/webapp .",
     "run-docker": "docker run --name codesample_webapp -d -p 80:80 codesample/webapp",
     "kill-docker": "docker kill codesample_webapp && docker rm codesample_webapp"
   },

@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  database:
+    build: ./database
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+
+  db-admin:
+    image: thajeztah/pgadmin4
+    ports:
+      - 5050:5050
+    depends_on:
+      - 'database'
+
+  server:
+    build: ./server
+    ports:
+      - 3000:3000
+    depends_on:
+      - 'database'
+
+  webapp:
+    build: ./webapp
+    ports:
+      - 80:80
+    depends_on:
+      - 'server'
+
+volumes:
+  postgres-data:
+    driver: local
