@@ -1,0 +1,8 @@
+FROM thajeztah/pgadmin4
+
+COPY p4gAdmin.servers.json .
+
+EXPOSE 5050
+
+RUN ["python", "/usr/local/lib/python2.7/site-packages/pgadmin4/setup.py", "--load-servers",  "p4gAdmin.servers.json"]
+CMD ["python", "./usr/local/lib/python2.7/site-packages/pgadmin4/pgAdmin4.py"]
