@@ -4,7 +4,8 @@
   "description": "ExpressJS server for CodeSample app",
   "main": "app.js",
   "scripts": {
-    "serve": "node app.js",
+    "start": "node --inspect app.js",
+    "debug": "nodemon",
     "build-docker": "docker build -t codesample/server .",
     "run-docker": "docker run --name codesample_server -d -p 3000:3000 codesample/server",
     "kill-docker": "docker kill codesample_server && docker rm codesample_server",
@@ -18,6 +19,7 @@
     "expess": "0.0.1-security",
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",
+    "nodemon": "^2.0.15",
     "pg": "^8.7.1"
   },
   "devDependencies": {

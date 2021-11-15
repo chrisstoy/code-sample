@@ -25,40 +25,41 @@ export class NotesService {
         return this.http.get<NoteSummary[]>(url);
       })
     );
-
-    // return of([
-    //   {
-    //     id: 'db7d4695-daf8-4bfb-a5c1-4b2f8c7a32fb',
-    //     title: 'Things to Do',
-    //     lastUpdate: new Date('2021-11-01T17:39:55.505Z'),
-    //   },
-    //   {
-    //     id: 'f11f09f9-8dcb-4b63-84b7-37b24e000359',
-    //     title: 'Poem',
-    //     lastUpdate: new Date('2021-11-01T17:39:55.505Z'),
-    //   },
-    // ]);
   }
 
   /**
    * Return the requested note, or undefined if not found
    */
   getNote(noteId: string): Observable<Note | undefined> {
-    return of({
-      id: 'f11f09f9-8dcb-4b63-84b7-37b24e000359',
-      ownerId: '5450e4d9-3f69-4921-ad6f-28208e0f3860',
-      lastUpdate: new Date('2021-11-01T17:39:55.505Z'),
-      title: 'Poem',
-      text: 'Roses are red, violets are blue, Yoda uses the force, and I do too!',
-    });
+    return combineLatest([this.configService.config$, this.authService.user$]).pipe(
+      take(1),
+      map(([config, user]) => {
+        return `${config.apiUrl}/notes/${user!.id}/${noteId}`;
+      }),
+      switchMap((url: string) => {
+        return this.http.get<Note>(url);
+      })
+    );
   }
 
   /**
    * Update the Note with the new data
    * @param note
    */
-  updateNote(id: string, title: string, text: string): Observable<Note | undefined> {
-    return of(undefined);
+  updateNote(noteId: string, title: string, text: string): Observable<Note | undefined> {
+    return combineLatest([this.configService.config$, this.authService.user$]).pipe(
+      take(1),
+      map(([config, user]) => {
+        return `${config.apiUrl}/notes/${user!.id}/${noteId}`;
+      }),
+      switchMap((url: string) => {
+        let body = {
+          title,
+          text,
+        } as Note;
+        return this.http.put<Note>(url, body);
+      })
+    );
   }
 
   /**
@@ -66,7 +67,20 @@ export class NotesService {
    * @param note
    */
   createNote(title: string, text: string): Observable<undefined> {
-    return of(undefined);
+    return combineLatest([this.configService.config$, this.authService.user$]).pipe(
+      take(1),
+      map(([config, user]) => {
+        return `${config.apiUrl}/notes/${user!.id}`;
+      }),
+      switchMap((url: string) => {
+        let body = {
+          title,
+          text,
+        } as Note;
+        return this.http.post(url, body);
+      }),
+      map(() => undefined)
+    );
   }
 
   /**
@@ -74,6 +88,15 @@ export class NotesService {
    * @param noteId note to delete
    */
   deleteNote(noteId: string): Observable<undefined> {
-    return of(undefined);
+    return combineLatest([this.configService.config$, this.authService.user$]).pipe(
+      take(1),
+      map(([config, user]) => {
+        return `${config.apiUrl}/notes/${user!.id}/${noteId}`;
+      }),
+      switchMap((url: string) => {
+        return this.http.delete(url);
+      }),
+      map(() => undefined)
+    );
   }
 }

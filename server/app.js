@@ -10,13 +10,21 @@ const app = express();
 const port = 3000;
 
 // allow access from anywhere because we like living on the edge
-app.use(cors());
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 
 // parse application/json
 app.use(bodyParser.json());
 
 // load all of our routes
 mountRoutes(app);
+
+app.get('/', (request, response) => {
+  response.status(200).json({ status: 'ok' });
+});
 
 // generic error handler just returns error code with error as body
 app.use((err, req, res) => {

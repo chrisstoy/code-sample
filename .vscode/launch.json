@@ -17,7 +17,12 @@
             "type": "node",
             "request": "launch",
             "name": "Debug Server",
-            "program": "${workspaceFolder}/server/app.js"
+            "cwd": "${workspaceFolder}/server",
+            "runtimeExecutable": "node",
+            "runtimeArgs": [
+                "--inspect",
+                "app.js"
+            ]
         }
     ]
 }

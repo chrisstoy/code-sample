@@ -14,7 +14,7 @@ export class ConfigService {
 
   constructor() {
     this.configSubject.next({
-      apiUrl: 'localhost:4200/api',
+      apiUrl: 'http://localhost:3000',
     });
   }
 }
